@@ -1,0 +1,29 @@
+{
+  "name": "maximize-canvas",
+  "version": "0.0.1",
+  "description": "Make canvas occupy entire browser window within provided resolution constraints and layout configuration",
+  "main": "index.js",
+  "scripts": {
+    "demo": "./node_modules/.bin/beefy demo.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "canvas",
+    "resize",
+    "maximize",
+    "fullscreen",
+    "fit",
+    "screen"
+  ],
+  "author": "Sergey Batishchev",
+  "license": "MIT",
+  "dependencies": {
+    "fit-rect": "^1.0.2",
+    "aspect-to-rect": "0.0.1",
+    "mini-signals": "^1.1.1"
+  },
+  "devDependencies": {
+    "beefy": "^2.1.8",
+    "browserify": "^14.3.0"
+  }
+}

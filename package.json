@@ -1,7 +1,7 @@
 {
   "name": "maximize-canvas",
   "version": "0.0.1",
-  "description": "Make canvas occupy entire browser window within provided resolution constraints and layout configuration",
+  "description": "Make canvas occupy entire browser window within provided resolution constraints",
   "main": "index.js",
   "scripts": {
     "demo": "./node_modules/.bin/beefy demo.js",

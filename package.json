@@ -20,8 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "fit-rect": "^1.0.2",
-    "aspect-to-rect": "0.0.1",
-    "mini-signals": "^1.1.1"
+    "aspect-to-rect": "0.0.1"
   },
   "devDependencies": {
     "beefy": "^2.1.8",

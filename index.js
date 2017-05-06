@@ -2,16 +2,24 @@ var aspectToRect = require('aspect-to-rect');
 var fitRect = require('fit-rect');
 
 module.exports = function (canvas, options, onResize) {
-    return new MaximizedCanvas(canvas, options, onResize);
+    return new CanvasBinding(canvas, options, onResize);
 };
 
-function MaximizedCanvas(canvas, options, onResize) {
+function CanvasBinding(canvas, options, onResize) {
     this.onResize = onResize;
     this.options = options;
     this.canvas = canvas;
+    // Without intermediate DIV certain old 4.x native Android browsers
+    // "duplicated" canvas on the screen
+    // http://stackoverflow.com/questions/18271990/android-native-browser-duplicating-html5-canvas-fine-in-chrome
+    // This is probably not much relevant in 2017, but the fix is easy and - probably - cannot cause much harm.
+    this.canvasHolder = document.createElement("div");
 
     canvas.style.position = "absolute";
-    document.body.appendChild(canvas);
+    this.canvasHolder.style.position = "absolute";
+    this.canvasHolder.style.overflow = "hidden";
+    this.canvasHolder.appendChild(this.canvas);
+    document.body.appendChild(this.canvasHolder);
 
     var self = this;
     this.resizeHandler = function() {
@@ -22,13 +30,14 @@ function MaximizedCanvas(canvas, options, onResize) {
     this.resizeHandler();
 }
 
-MaximizedCanvas.prototype.detach = function() {
+CanvasBinding.prototype.detach = function() {
     window.removeEventListener('resize', this.resizeHandler);
 };
 
 var canvasSize = {width: 0, height: 0};
 
-MaximizedCanvas.prototype._resize = function() {
+
+CanvasBinding.prototype._resize = function() {
     var windowWidth = window.innerWidth;
     var windowHeight = window.innerHeight;
     if (windowHeight < 1) {
@@ -43,10 +52,10 @@ MaximizedCanvas.prototype._resize = function() {
     this.canvas.height = canvasSize.height;
 
     var canvasPosition = fitRect([0, 0, canvasSize.width, canvasSize.height], [0, 0, windowWidth, windowHeight]);
-    this.canvas.style.left = canvasPosition[0] + "px";
-    this.canvas.style.top = canvasPosition[1] + "px";
-    this.canvas.style.width = canvasPosition[2] + "px";
-    this.canvas.style.height = canvasPosition[3] + "px";
+    this.canvasHolder.style.left = canvasPosition[0] + "px";
+    this.canvasHolder.style.top = canvasPosition[1] + "px";
+    this.canvasHolder.style.width = this.canvas.style.width = canvasPosition[2] + "px";
+    this.canvasHolder.style.height = this.canvas.style.height = canvasPosition[3] + "px";
 
     this.onResize && this.onResize();
 };

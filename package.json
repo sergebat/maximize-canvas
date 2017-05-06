@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "demo": "./node_modules/.bin/beefy demo.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "make": "./node_modules/.bin/browserify index.js --s maximize_canvas > lib/maximize_canvas.js"
   },
   "keywords": [
     "canvas",

@@ -1,13 +1,13 @@
 var maximizeCanvas = require("./");
 var canvas = document.createElement('canvas');
-maximizeCanvas(
+var canvasBinding = maximizeCanvas(
     canvas,
     {
-        width: {min: 712, max: 1024},
-        height: 640
+        width: {min: 712, max: 1024}, // canvas.width will be adjusted between 712 and 1024
+        height: 640 // canvas.height is fixed to 640 pixels
     },
     function() {
-        // Draw canvas content on each resize
+        // Draw canvas content on each resize for a demo
         var context = canvas.getContext("2d");
 
         // Clear canvas and put coordinates into it's center
@@ -19,10 +19,11 @@ maximizeCanvas(
         context.fillStyle = "red";
         context.fillRect(-512, -320, 1024, 640);
 
-        // Simualte fixed resolution 712x640 main game area (which must always be visible)
+        // Simulate fixed resolution 712x640 main game area (which must always be visible)
         context.fillStyle = "blue";
         context.fillRect(-356, -320, 712, 640);
     }
 );
 
-
+// If you need to stop canvas from resizing - just detach it
+// canvasBinding.detach();

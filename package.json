@@ -1,6 +1,6 @@
 {
   "name": "maximize-canvas",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Make canvas occupy entire browser window within provided resolution constraints",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,11 @@
     "fit",
     "screen"
   ],
+  "repository" :
+  {
+    "type" : "git",
+    "url" : "https://github.com/sergebat/maximize-canvas.git"
+  },
   "author": "Sergey Batishchev",
   "license": "MIT",
   "dependencies": {

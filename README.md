@@ -14,7 +14,7 @@ Or grab pre-built library from lib directory (maximize_canvas is global there):
 <script src="maximize_canvas.min.js">
 ```
  
-## How to use it?  
+## How to use it?    
   
  ```javascript
   
@@ -30,7 +30,8 @@ Or grab pre-built library from lib directory (maximize_canvas is global there):
          // Optional onResize callback. Do your game relayout.
      }
  );
- ``` 
+ ```
+  
 ## What's going on in the above code?
 Let's say the game is portrait: 
   
@@ -44,10 +45,25 @@ maximize-canvas call does the following:
  * Starts listening for window.resize event
  * Keeps canvas width fixed, and adjusts height to match the device aspect ratio on each resize
  * Scale canvas up with CSS to cover the entire screen
+
     
+## What if my game has fixed 960x640 resolution?
+Just don't provide any options to maximizeCanvas and it will keep original canvas size. It will 
+still append canvas to the window, and keep stretching it with CSS as window resizes. 
+
+However, "black bars" around canvas will appear if device aspect ratio does not match. We cannot
+do our magic if you don't allow us to change your canvas width or height!
+     
+    ```javascript
+    var maximizeCanvas = require("maximize-canvas");
+    var canvas = document.createElement('canvas');
+    canvas.width = 960; canvas.height = 640;
+    var canvasBinding = maximizeCanvas(canvas);
+    ```
+ 
 ## What if my game is landscape? 
 
-You guessed it right! 
+You can define any combination of fixed and range values for width and height.
 
  ```javascript
  var maximizeCanvas = require("maximize-canvas");
@@ -66,7 +82,8 @@ You guessed it right!
 
 ## Can we support both orientations? 
 
-Yes, best matching config will be picked automatically.
+Yes, best matching config will be picked automatically. You are guaranteed to have at least 640x750 or 850x640 canvas
+with the below config. This is useful if your game supports separate vertical and horizontal layouts.
 
 ```javascript
 var maximizeCanvas = require("maximize-canvas");
@@ -75,10 +92,10 @@ var canvasBinding = maximizeCanvas(
     canvas, [
         {
             width: 640, 
-            height: {min: 800, max: 1200}
+            height: {min: 750, max: 1200}
         },        
         {
-            width: {min: 800, max: 1200}, 
+            width: {min: 850, max: 1200}, 
             height: 640
         }
     ],
@@ -87,6 +104,26 @@ var canvasBinding = maximizeCanvas(
     }
 );
 ```
+
+Alternatively, you can configure it in a single config like below. This way you are guaranteed to have at least 640x700 canvas. 
+It can grow vertically to 640x2048, and horizontally to 2048x700. This is useful if you have single layout, but ready
+to render optional background art around it. 
+ 
+ ```javascript
+ var maximizeCanvas = require("maximize-canvas");
+ var canvas = document.createElement('canvas');
+ var canvasBinding = maximizeCanvas(
+     canvas,
+     {
+         width: {min: 640, max: 2048}, 
+         height: {min: 700, max: 2048}
+     },
+     function() {
+         // Optional onResize callback
+     }
+ );
+ ```
+
 
 ## Why another canvas "fit" module? Don't we have enough? 
 

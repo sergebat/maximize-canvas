@@ -1,5 +1,5 @@
 /*
-    Use "npm run beefy demo/demo.js --open" to launch beefy dev server
+    npm run beefy demo/demo-no-options.js"
  */
 var maximizeCanvas = require("../.");
 var canvas = document.createElement('canvas');

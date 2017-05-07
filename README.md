@@ -4,9 +4,15 @@ Stretches canvas to the entire window proportionally. Avoids "black bars". Made 
 
 ## Installation
 
+Via npm (recommended):
 ```
 $ npm install maximize-canvas
 ``` 
+
+Or grab pre-built library from lib directory (maximize_canvas is global there):
+```
+<script src="maximize_canvas.min.js">
+```
  
 ## How to use it?  
   

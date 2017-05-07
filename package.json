@@ -1,6 +1,6 @@
 {
   "name": "maximize-canvas",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Make canvas occupy entire browser window within provided resolution constraints",
   "main": "index.js",
   "scripts": {

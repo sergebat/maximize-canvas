@@ -1,3 +1,6 @@
+/*
+    Using maximize-canvas as npm module (use "npm run demo" to launch beefy dev server)
+ */
 var maximizeCanvas = require("./");
 var canvas = document.createElement('canvas');
 var canvasBinding = maximizeCanvas(

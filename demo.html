@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>maximise-canvas from script tag</title>
+    <script src="lib/maximize_canvas.min.js"></script>
+</head>
+<body>
+<script>
+    // see demo.js for explanation
+    var canvas = document.createElement('canvas');
+    var canvasBinding = maximize_canvas(
+        canvas,
+        {
+            width: {min: 712, max: 1024},
+            height: 640
+        },
+        function() {
+            var context = canvas.getContext("2d");
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.transform(1, 0, 0, 1, canvas.width / 2, canvas.height / 2);
+            context.fillStyle = "red";
+            context.fillRect(-512, -320, 1024, 640);
+            context.fillStyle = "blue";
+            context.fillRect(-356, -320, 712, 640);
+        }
+    );
+
+</script>
+</body>
+</html>

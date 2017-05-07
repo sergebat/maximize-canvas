@@ -7,13 +7,21 @@ module.exports = function (canvas, options, onResize) {
 
 function CanvasBinding(canvas, options, onResize) {
     this.onResize = onResize;
-    this.options = options;
+    this.options = options || {};
     this.canvas = canvas;
     // Without intermediate DIV certain old 4.x native Android browsers
     // "duplicated" canvas on the screen
     // http://stackoverflow.com/questions/18271990/android-native-browser-duplicating-html5-canvas-fine-in-chrome
     // This is probably not much relevant in 2017, but the fix is easy and - probably - cannot cause much harm.
     this.canvasHolder = document.createElement("div");
+
+    // Width/height not defined? Use canvas values as defaults.
+    if (this.options.hasOwnProperty("width")) {
+        this.options.width = canvas.width;
+    }
+    if (this.options.hasOwnProperty("height")) {
+        this.options.height = canvas.height;
+    }
 
     canvas.style.position = "absolute";
     this.canvasHolder.style.position = "absolute";

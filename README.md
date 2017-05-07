@@ -10,7 +10,7 @@ $ npm install maximize-canvas
 ``` 
 
 Or grab pre-built library from lib directory (maximize_canvas is global there):
-```
+```html
 <script src="maximize_canvas.min.js">
 ```
  

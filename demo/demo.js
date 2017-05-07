@@ -1,13 +1,14 @@
 /*
-    Using maximize-canvas as npm module (use "npm run demo" to launch beefy dev server)
+    Use "npm run beefy demo/demo.js --open" to launch beefy dev server
  */
-var maximizeCanvas = require("./");
+var maximizeCanvas = require("../.");
 var canvas = document.createElement('canvas');
 var canvasBinding = maximizeCanvas(
     canvas,
     {
         width: {min: 712, max: 1024}, // canvas.width will be adjusted between 712 and 1024
         height: 640 // canvas.height is fixed to 640 pixels
+
     },
     function() {
         // Draw canvas content on each resize for a demo

@@ -4,6 +4,7 @@
   "description": "Make canvas occupy entire browser window within provided resolution constraints",
   "main": "index.js",
   "scripts": {
+    "beefy": "./node_modules/.bin/beefy",
     "demo": "./node_modules/.bin/beefy demo.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "make": "./node_modules/.bin/browserify index.js --s maximize_canvas > lib/maximize_canvas.js",
@@ -17,10 +18,9 @@
     "fit",
     "screen"
   ],
-  "repository" :
-  {
-    "type" : "git",
-    "url" : "https://github.com/sergebat/maximize-canvas.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sergebat/maximize-canvas.git"
   },
   "author": "Sergey Batishchev",
   "license": "MIT",

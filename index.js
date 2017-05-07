@@ -16,10 +16,10 @@ function CanvasBinding(canvas, options, onResize) {
     this.canvasHolder = document.createElement("div");
 
     // Width/height not defined? Use canvas values as defaults.
-    if (this.options.hasOwnProperty("width")) {
+    if (!this.options.hasOwnProperty("width")) {
         this.options.width = canvas.width;
     }
-    if (this.options.hasOwnProperty("height")) {
+    if (!this.options.hasOwnProperty("height")) {
         this.options.height = canvas.height;
     }
 
@@ -56,9 +56,13 @@ CanvasBinding.prototype._resize = function() {
     }
 
     aspectToRect(windowWidth / windowHeight, this.options, canvasSize);
-    this.canvas.width = canvasSize.width;
-    this.canvas.height = canvasSize.height;
-
+    // Seeting canvas width/height to the same value will clear the canvas. This might be not desirable.
+    if (this.canvas.width != canvasSize.width) {
+        this.canvas.width = canvasSize.width;
+    }
+    if (this.canvas.height != canvasSize.height) {
+        this.canvas.height = this.canvas.height;
+    }
     var canvasPosition = fitRect([0, 0, canvasSize.width, canvasSize.height], [0, 0, windowWidth, windowHeight]);
     this.canvasHolder.style.left = canvasPosition[0] + "px";
     this.canvasHolder.style.top = canvasPosition[1] + "px";

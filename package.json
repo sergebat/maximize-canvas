@@ -8,7 +8,8 @@
     "demo": "./node_modules/.bin/beefy demo.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "make": "./node_modules/.bin/browserify index.js --s maximize_canvas > lib/maximize_canvas.js",
-    "uglify": "./node_modules/.bin/uglifyjs lib/maximize_canvas.js -c > lib/maximize_canvas.min.js "
+    "uglify": "./node_modules/.bin/uglifyjs lib/maximize_canvas.js -c > lib/maximize_canvas.min.js ",
+    "licenses": "./node_modules/.bin/npm-license > lib/LICENSE.txt"
   },
   "keywords": [
     "canvas",

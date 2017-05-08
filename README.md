@@ -125,9 +125,8 @@ Some graphics/game engines (for example, PIXI) provide their own function to cha
 Use resizeCanvas callback to provide your own render resize implementation. 
 
  ```javascript
- var renderer = PIXI.autoDetectRenderer({width: 640, height: 700});
  var maximizeCanvas = require("maximize-canvas");
- var canvas = document.createElement('canvas');
+ var renderer = PIXI.autoDetectRenderer({width: 640, height: 700});
  var canvasBinding = maximizeCanvas(
      renderer.view, {
          dimensions: {

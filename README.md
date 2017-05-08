@@ -26,8 +26,8 @@ Or grab pre-built library from lib directory (maximize_canvas is global there):
          width: 640,
          height: {min: 712, max: 1136} 
      },
-     function() {
-         // Optional onResize callback. Do your game relayout.
+     function(width, height) {
+         // Optional onResize callback with new canvas width/height. Relayout your game here if necessary.
      }
  );
  ```
@@ -74,8 +74,8 @@ You can define any combination of fixed and range values for width and height.
          width: {min: 1024, max: 2048},
          height: 768  
      },
-     function() {
-         // Optional onResize callback
+     function(width, height) {
+         // Optional onResize callback with new canvas width/height. Relayout your game here if necessary.
      }
  );
  ```
@@ -99,9 +99,9 @@ var canvasBinding = maximizeCanvas(
             height: 640
         }
     ],
-    function() {
-        // Optional onResize callback
-    }
+     function(width, height) {
+         // Optional onResize callback with new canvas width/height. Relayout your game here if necessary.
+     }
 );
 ```
 
@@ -118,8 +118,8 @@ to render optional background art around it.
          width: {min: 640, max: 2048}, 
          height: {min: 700, max: 2048}
      },
-     function() {
-         // Optional onResize callback
+     function(width, height) {
+         // Optional onResize callback with new canvas width/height. Relayout your game here if necessary.
      }
  );
  ```
@@ -139,4 +139,4 @@ Option 2 is very flexible, but:
 * Your game will have to scale the sprites to any arbitrary resolution. Not every engine supports it, and in pre-WebGL
 world it is also slow.
 * You are on your own with corner cases (very wide or very narrow game window, for example)
- 
+   

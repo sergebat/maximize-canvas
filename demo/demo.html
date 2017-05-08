@@ -7,25 +7,24 @@
 </head>
 <body>
 <script>
-    // see demo.js for explanation
-    var canvas = document.createElement('canvas');
-    var canvasBinding = maximize_canvas(
+    var canvasBinding = maximizeCanvas(
         canvas,
         {
-            width: {min: 712, max: 1024},
-            height: 640
-        },
-        function(width, height) {
-            var context = canvas.getContext("2d");
-            context.clearRect(0, 0, width, height);
-            context.transform(1, 0, 0, 1, width / 2, height / 2);
-            context.fillStyle = "red";
-            context.fillRect(-512, -320, 1024, 640);
-            context.fillStyle = "blue";
-            context.fillRect(-356, -320, 712, 640);
+            dimensions: {
+                width: {min: 712, max: 1024}, // canvas.width will be adjusted between 712 and 1024
+                height: 640 // canvas.height is fixed to 640 pixels
+            },
+            onCanvasResized: function(width, height) {
+                var context = canvas.getContext("2d");
+                context.clearRect(0, 0, width, height);
+                context.transform(1, 0, 0, 1, width / 2, height / 2);
+                context.fillStyle = "red";
+                context.fillRect(-512, -320, 1024, 640);
+                context.fillStyle = "blue";
+                context.fillRect(-356, -320, 712, 640);
+            }
         }
     );
-
 </script>
 </body>
 </html>

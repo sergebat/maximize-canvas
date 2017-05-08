@@ -1,0 +1,10 @@
+├─ aspect-to-rect@0.0.1
+│  ├─ licenses: MIT
+│  └─ repository: https://github.com/sergebat/aspect-to-rect
+├─ fit-rect@1.0.2
+│  ├─ licenses: MIT
+│  └─ repository: https://github.com/vorg/fit-rect
+└─ maximize-canvas@1.0.2
+   ├─ licenses: MIT
+   └─ repository: https://github.com/sergebat/maximize-canvas
+

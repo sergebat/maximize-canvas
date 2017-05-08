@@ -10,13 +10,13 @@ var canvasBinding = maximizeCanvas(
         height: 640 // canvas.height is fixed to 640 pixels
 
     },
-    function() {
+    function(width, height) {
         // Draw canvas content on each resize for a demo
         var context = canvas.getContext("2d");
 
         // Clear canvas and put coordinates into it's center
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.transform(1, 0, 0, 1, canvas.width / 2, canvas.height / 2);
+        context.clearRect(0, 0, width, height);
+        context.transform(1, 0, 0, 1, width / 2, height / 2);
 
         // Simulate fixed resolution 1024x640 game background (which can be clipped on the sides if needed,
         // but it does not make sense to extend canvas beyond it)

@@ -69,5 +69,5 @@ CanvasBinding.prototype._resize = function() {
     this.canvasHolder.style.width = this.canvas.style.width = canvasPosition[2] + "px";
     this.canvasHolder.style.height = this.canvas.style.height = canvasPosition[3] + "px";
 
-    this.onResize && this.onResize();
+    this.onResize && this.onResize(canvasSize.width, canvasSize.height);
 };

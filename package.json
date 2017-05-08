@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "beefy": "^2.1.8",
-    "browserify": "^14.3.0"
+    "browserify": "^14.3.0",
+    "uglify-js": "^3.0.1"
   }
 }

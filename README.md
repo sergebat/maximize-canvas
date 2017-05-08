@@ -21,13 +21,14 @@ Or grab pre-built library from lib directory (maximize_canvas is global there):
  var maximizeCanvas = require("maximize-canvas");
  var canvas = document.createElement('canvas');
  var canvasBinding = maximizeCanvas(
-     canvas,
-     {
-         width: 640,
-         height: {min: 712, max: 1136} 
-     },
-     function(width, height) {
-         // Optional onResize callback with new canvas width/height. Relayout your game here if necessary.
+     canvas, {
+         dimensions: {
+             width: 640,
+             height: {min: 712, max: 1136}              
+         },
+         onCanvasResized: function(width, height) {
+            // Optional callback invoked, after canvas.width or canvas.height are changed
+         }
      }
  );
  ```
@@ -46,7 +47,6 @@ maximize-canvas call does the following:
  * Keeps canvas width fixed, and adjusts height to match the device aspect ratio on each resize
  * Scale canvas up with CSS to cover the entire screen
 
-    
 ## What if my game has fixed 960x640 resolution?
 Just don't provide any options to maximizeCanvas and it will keep original canvas size. It will 
 still append canvas to the window, and keep stretching it with CSS as window resizes. 
@@ -69,13 +69,11 @@ You can define any combination of fixed and range values for width and height.
  var maximizeCanvas = require("maximize-canvas");
  var canvas = document.createElement('canvas');
  var canvasBinding = maximizeCanvas(
-     canvas,
-     {
-         width: {min: 1024, max: 2048},
-         height: 768  
-     },
-     function(width, height) {
-         // Optional onResize callback with new canvas width/height. Relayout your game here if necessary.
+     canvas, {
+         dimensions: {
+             width: {min: 1024, max: 2048},
+             height: 768  
+         }
      }
  );
  ```
@@ -89,20 +87,18 @@ with the below config. This is useful if your game supports separate vertical an
 var maximizeCanvas = require("maximize-canvas");
 var canvas = document.createElement('canvas');
 var canvasBinding = maximizeCanvas(
-    canvas, [
-        {
-            width: 640, 
-            height: {min: 750, max: 1200}
-        },        
-        {
-            width: {min: 850, max: 1200}, 
-            height: 640
-        }
-    ],
-     function(width, height) {
-         // Optional onResize callback with new canvas width/height. Relayout your game here if necessary.
-     }
-);
+    canvas, {
+        dimensions: [
+            {
+                width: 640, 
+                height: {min: 750, max: 1200}
+            },        
+            {
+                width: {min: 850, max: 1200}, 
+                height: 640
+            }
+        ]
+    });
 ```
 
 Alternatively, you can configure it in a single config like below. This way you are guaranteed to have at least 640x700 canvas. 
@@ -113,17 +109,47 @@ to render optional background art around it.
  var maximizeCanvas = require("maximize-canvas");
  var canvas = document.createElement('canvas');
  var canvasBinding = maximizeCanvas(
-     canvas,
-     {
-         width: {min: 640, max: 2048}, 
-         height: {min: 700, max: 2048}
-     },
-     function(width, height) {
-         // Optional onResize callback with new canvas width/height. Relayout your game here if necessary.
+     canvas, {
+         dimensions: {
+             width: {min: 640, max: 2048}, 
+             height: {min: 700, max: 2048}
+         }
      }
  );
  ```
 
+## My game engine breaks when canvas.width/canvas.height are changed externally 
+ 
+Some graphics/game engines (for example, PIXI) provide their own function to change canvas width/height properly. 
+ 
+Use resizeCanvas callback to provide your own render resize implementation. 
+
+ ```javascript
+ var renderer = PIXI.autoDetectRenderer({width: 640, height: 700});
+ var maximizeCanvas = require("maximize-canvas");
+ var canvas = document.createElement('canvas');
+ var canvasBinding = maximizeCanvas(
+     renderer.view, {
+         dimensions: {
+             width: {min: 640, max: 2048}, 
+             height: {min: 700, max: 2048}
+         },
+         resizeCanvas: function(width, height) {
+             renderer.resize(width, height);
+         }
+     }
+ );
+ ```
+## Can we resize canvas inside its parent element, not add it to the window object?
+  
+This module is primarily meant for use in "full-screen canvas" games. Even with this very simple scenario 
+things get buggy sometimes (see "duplicate canvas on older Android native browser"). For this reason maximize-canvas
+will stay focused on this trivial use case.  
+
+If your DOM tree is different, check out math/geometry modules behind maximize-canvas: 
+
+- aspect-to-rect - finding canvas.width and canvas.height by screen aspect ratio withing given ranges
+- fit-rect - fit one rect (canvas) within another rect (screen), scaling it proportionally 
 
 ## Why another canvas "fit" module? Don't we have enough? 
 

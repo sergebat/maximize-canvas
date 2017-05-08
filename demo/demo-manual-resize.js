@@ -1,5 +1,5 @@
 /*
-    npm run beefy demo/demo-no-options.js"
+ npm run beefy demo/demo-manual-resize.js"
  */
 var maximizeCanvas = require("../.");
 var canvas = document.createElement('canvas');
@@ -10,7 +10,15 @@ var canvasBinding = maximizeCanvas(
             width: {min: 712, max: 1024}, // canvas.width will be adjusted between 712 and 1024
             height: 640 // canvas.height is fixed to 640 pixels
         },
-        onCanvasResized: function(width, height) {
+        resizeCanvas: function(width, height) {
+            // Unlike onCanvasResized, the resizeCanvas callback gives you an option to
+            // resize canvas manually. For example, your engine may have special function for it
+            // (such as PIXI's WebGLRenderer), and may break if outside world just mess around with
+            // canvas dimension.
+
+            canvas.width = width;
+            canvas.height = height;
+
             // Draw canvas content on each resize for a demo
             var context = canvas.getContext("2d");
 

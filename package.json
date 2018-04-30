@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "beefy": "./node_modules/.bin/beefy",
-    "demo": "./node_modules/.bin/beefy demo.js",
+    "demo": "./node_modules/.bin/beefy demo/demo.js",
+    "demo-no-options": "./node_modules/.bin/beefy demo/demo-no-options.js",
+    "demo-manual-resize": "./node_modules/.bin/beefy demo/demo-manual-resize.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "make": "./node_modules/.bin/browserify index.js --s maximize_canvas > lib/maximize_canvas.js",
     "uglify": "./node_modules/.bin/uglifyjs lib/maximize_canvas.js -c > lib/maximize_canvas.min.js ",

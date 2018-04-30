@@ -24,6 +24,7 @@ var canvasBinding = maximizeCanvas(
 
             // Clear canvas and put coordinates into it's center
             context.clearRect(0, 0, width, height);
+            context.save();
             context.transform(1, 0, 0, 1, width / 2, height / 2);
 
             // Simulate fixed resolution 1024x640 game background (which can be clipped on the sides if needed,
@@ -34,6 +35,8 @@ var canvasBinding = maximizeCanvas(
             // Simulate fixed resolution 712x640 main game area (which must always be visible)
             context.fillStyle = "blue";
             context.fillRect(-356, -320, 712, 640);
+
+            context.restore();
         }
     }
 );
